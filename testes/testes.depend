@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1567631233 source:c:\users\matrizsestudo2019.1\desktop\testes\main.cpp
+	<iostream>
+	<string>
+	<limits>
+	<fstream>
+
+1567709925 source:c:\users\matrizsestudo2019.1\downloads\loja\testes\main.cpp
+	<iostream>
+	<string>
+	<limits>
+	<fstream>
+
+1567968522 source:c:\users\guilherme nascimento\documents\loja\testes\main.cpp
+	<iostream>
+	<string>
+	<limits>
+	<fstream>
+

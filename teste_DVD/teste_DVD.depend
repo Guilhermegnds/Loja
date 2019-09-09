@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1567708461 source:c:\users\matrizsestudo2019.1\downloads\loja\teste_dvd\main.cpp
+	<iostream>
+	<string>
+	<limits>
+	<fstream>
+
