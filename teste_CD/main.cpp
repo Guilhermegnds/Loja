@@ -73,9 +73,16 @@ public:
 bool CD :: ler(istream &I){
 
   //   if(arq.is_open) verifica se o arquivo pode ser aberto
+     string teste;
+     getline(I, teste, ' ');
+     cout << teste <<endl;
+     if (teste == "C:"){
      Produto :: ler(I);
-     I.ignore(numeric_limits <streamsize>::max(), '"');
+     I.ignore(numeric_limits <streamsize>::max(), ';');
      I >> nf;
+     }
+     else return false;
+
 }
 
 void CD :: salvar(ostream &S)const{
@@ -87,12 +94,14 @@ void CD :: salvar(ostream &S)const{
 }
 
 void CD :: digitar(){
-
+    int teste;
     Produto :: digitar();
-
+    do{
     cout << "Digite o numero de faixas: ";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cin >> nf;
+//    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin >> teste;
+    }while(teste < 0);
+    nf = teste;
 }
 
 void CD :: imprimir() const{
@@ -107,8 +116,8 @@ inline istream& operator>>(istream &I, CD &C) {C.digitar(); return I;}
 inline ostream& operator<<(ostream &S, const CD &C) {C.salvar(S); return S;}
 
 int main()
-{   ofstream arq("saida.txt");
-    ifstream arq2("saida3.txt");
+{  // ofstream arq("saida.txt");
+    ifstream arq2("saida.txt");
     CD P;
     P.ler(arq2);
     P.imprimir();

@@ -60,7 +60,7 @@ inline ostream& operator<<(ostream &O, const Produto &P) {P.salvar(O); return O;
 class DVD: public Produto{
 
 private:
-    int duracao;
+    unsigned duracao;
 public:
     inline DVD(const string& N="", unsigned P=0, int D=0): Produto(N,P), duracao(D) {}
     bool ler (istream &L);
@@ -72,25 +72,33 @@ public:
 bool DVD :: ler(istream &I){
 
   //   if(arq.is_open) verifica se o arquivo pode ser aberto
+     string teste;
+     getline(I, teste, ' ');
+     cout << teste <<endl;
+     if (teste == "D:"){
      Produto :: ler(I);
-     I.ignore(numeric_limits <streamsize>::max(), '"');
+    I.ignore(numeric_limits <streamsize>::max(), ';');
      I >> duracao;
+     }
+     else return false;
 }
 
 void DVD :: salvar(ostream &S)const{
      S << "D: ";
      Produto :: salvar(S);
-     S << '"' << duracao << '"';
+     S << duracao;
 
 }
 
 void DVD :: digitar(){
-
+    int teste;
     Produto :: digitar();
-
+    do{
     cout << "Digite a duracao do DVD: ";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cin >> duracao;
+    cin >> teste;
+    }while(teste < 0);
+    duracao = teste;
 }
 
 void DVD :: imprimir() const{
@@ -104,7 +112,7 @@ inline istream& operator>>(istream &I, DVD &C) {C.digitar(); return I;}
 inline ostream& operator<<(ostream &S, const DVD &C) {C.salvar(S); return S;}
 
 int main()
-{ // ofstream arq("saida3.txt");
+{ //ofstream arq("saida.txt");
    ifstream arq2("saida.txt");
     DVD P;
     P.ler(arq2);

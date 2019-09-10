@@ -23,6 +23,9 @@ public:
 bool Produto :: ler(istream &I){
 
      unsigned valor=0, sob=0;
+     string teste("");
+     getline(I, teste, 'P');
+     if (teste == ""){
      I.ignore(numeric_limits <streamsize>::max(), '"');
      getline(I, nome, '"');
      I.ignore(numeric_limits <streamsize>::max(), ';');
@@ -31,7 +34,8 @@ bool Produto :: ler(istream &I){
      I.ignore(numeric_limits <streamsize>::max(), '.');
      I >> sob;
      preco = valor*100 + sob;
-  //   else return false;
+     }
+   else return false;
 }
 
 void Produto :: salvar(ostream &O) const{

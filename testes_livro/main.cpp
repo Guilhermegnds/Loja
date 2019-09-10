@@ -73,9 +73,15 @@ public:
 bool Livro :: ler(istream &I){
 
   //   if(arq.is_open) verifica se o arquivo pode ser aberto
+     string teste;
+     getline(I, teste, ' ');
+     cout << teste <<endl;
+     if (teste == "L:"){
      Produto :: ler(I);
      I.ignore(numeric_limits <streamsize>::max(), '"');
      getline(I, autor, '"');
+     }
+     else return false;
 }
 
 void Livro :: salvar(ostream &S)const{
@@ -108,10 +114,10 @@ inline istream& operator>>(istream &I, Livro &L) {L.digitar(); return I;}
 inline ostream& operator<<(ostream &S, const Livro &L) {L.salvar(S); return S;}
 
 int main()
-{  // ofstream arq("saida3.txt");
-    ifstream arq2("saida3.txt");
+{  // ofstream arq("saida.txt");
+    ifstream arq2("saida.txt");
     Livro P;
-    P.ler ();
+    P.ler(arq2);
     P.imprimir();
 
     return 0;

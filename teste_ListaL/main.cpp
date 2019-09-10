@@ -73,13 +73,20 @@ public:
 bool Livro :: ler(istream &I){
 
   //   if(arq.is_open) verifica se o arquivo pode ser aberto
+     string teste;
+     getline(I, teste, ' ');
+     cout << teste <<endl;
+     if (teste == "L:"){
      Produto :: ler(I);
      I.ignore(numeric_limits <streamsize>::max(), '"');
      getline(I, autor, '"');
+     }
+     else return false;
 }
 
 void Livro :: salvar(ostream &S)const{
 
+     S << "L: ";
      Produto :: salvar(S);
      S << '"' << autor << '"';
 
@@ -96,29 +103,31 @@ void Livro :: digitar(){
 
 void Livro :: imprimir() const{
 
+    cout << "L: ";
     Produto :: imprimir();
     cout << '"' << autor << '"';
 
 }
 
+
 inline istream& operator>>(istream &I, Livro &L) {L.digitar(); return I;}
 inline ostream& operator<<(ostream &S, const Livro &L) {L.salvar(S); return S;}
 
 
-class ListaLivro: public Produto
+class ListaLivro: public Livro
 {
 private:
   Livro *x;
   unsigned N;
 public:
   // Inclua os construtores, destrutor e operadores necessarios
-  inline ListaLivro (const string& N="", unsigned P=0, const string &M="", Livro &X = NULL, unsigned n=0): x(X), N(n) {}
-  explicit ListaLivro(ListaLivro &LL);
+  inline ListaLivro (const string& O="", unsigned P=0, const string &M="", Livro *X = NULL, unsigned n=0): Livro(O,P,M), x(X), N(n) {}
+  ListaLivro(const ListaLivro &LL);
   ~ListaLivro ();
   void operator=(const ListaLivro &L);
 
-  istream& operator>>(istream &I, ListaLivro &L);
-  ostream& operator<<(ostream &S, const ListaLivro &L);
+//  istream& operator>>(istream &I, ListaLivro &L);
+  //ostream& operator<<(ostream &S, const ListaLivro &L);
 
   void incluir(const Livro &L);
   bool excluir(unsigned id);
@@ -128,11 +137,13 @@ public:
   void imprimir() const;
 };
 
-explicit ListaLivro :: ListaLivro (ListaLivro &LL){
+ListaLivro :: ListaLivro ( const ListaLivro &LL){
 
 if(LL.N != 0){
-        N = LL.N
-    for (unsigned i = 0, i<N, i++ ) x[i] = LL.x[i]
+        N = LL.N;
+    for (unsigned i=0, i<N, i++) {
+        x[i] = LL.x[i];
+        }
 }
 }
 
@@ -150,8 +161,62 @@ for (unsigned i=0; i<N; i++) x[i]=L.x[i];
 
 }
 
+void ListaLivro :: incluir(const Livro &L){
+      unsigned Num=N;
+      float *prov = new float[Num+1];
+      for (i=0; i<Num; i++) prov[i] = x[i];
+      prov[N] = L;
+      if (x != NULL) delete[] x;
+      x = prov;
+      Num++;
+      N = Num;
+}
+
+bool ListaLivro :: ler(istream &I){
+
+  //   if(arq.is_open) verifica se o arquivo pode ser aberto
+     for (unsigned i=0; i<N; i++){
+     if (x[0] = "LISTALIVRO N"){
+     string teste;
+     getline(I, teste, ' ');
+     cout << teste <<endl;
+     if (teste == "L:"){
+     Livro :: ler(I);
+     }
+     }
+     else return false;
+     }
+}
+
+void ListaLivro :: salvar(ostream &O) const{
+      for (unsigned i=0; i<N; i++){
+          if(i = 0){
+            O << "LISTALIVRO " << N << endl;
+          }
+          else{
+            Livro :: salvar(O);
+            O << endl;
+          }
+      }
+}
+
+void ListaLivro :: imprimir()const{
+    unsigned i
+    for(i=0, i<N, i++){
+        if(i = 0){
+            cout << ">> LIVROS:" << endl;
+        }
+        else Livro :: imprimir();
+    }
+}
+
 int main()
-{
-    cout << "Hello world!" << endl;
+{  // ofstream arq("saida.txt");
+    ifstream arq2("saida.txt");
+    ListaLivro P;
+    P.incluir(arq2);
+    P.imprimir();
+
     return 0;
+}
 }
