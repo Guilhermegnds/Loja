@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1568228071 source:c:\users\20151062010042\desktop\qwdfgb\main.cpp
+	<iostream>
+	<string>
+	<limits>
+	<fstream>
+
+1568251067 source:c:\users\guilherme nascimento\documents\loja\loja\qwdfgb\main.cpp
+	<iostream>
+	<string>
+	<limits>
+	<fstream>
+

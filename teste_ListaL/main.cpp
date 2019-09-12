@@ -141,82 +141,75 @@ ListaLivro :: ListaLivro ( const ListaLivro &LL){
 
 if(LL.N != 0){
         N = LL.N;
-    for (unsigned i=0, i<N, i++) {
+     for (unsigned i=0; i<N; i++) {
         x[i] = LL.x[i];
         }
 }
 }
 
-~ListaLivro :: ListaLivro(ListaLivro &LL){
+ListaLivro :: ~ListaLivro(){
 
 if (x!=NULL) delete[] x;
   N = 0;
   x = NULL;
 }
 
-void operator=(const ListaLivro &L){
-
-N = L.N
-for (unsigned i=0; i<N; i++) x[i]=L.x[i];
-
-}
-
 void ListaLivro :: incluir(const Livro &L){
       unsigned Num=N;
-      float *prov = new float[Num+1];
-      for (i=0; i<Num; i++) prov[i] = x[i];
+      Livro *prov = new Livro[Num+1];
+      for (unsigned i=0; i<Num; i++) prov[i] = x[i];
       prov[N] = L;
-      if (x != NULL) delete[] x;
-      x = prov;
       Num++;
       N = Num;
+      if (x != NULL) delete[] x;
+      x = NULL;
+      x = prov;
+      prov = NULL;
+
 }
 
 bool ListaLivro :: ler(istream &I){
-
-  //   if(arq.is_open) verifica se o arquivo pode ser aberto
+     string pc("");
+     getline(I, pc, ' ');
+     I >> N;
+     if (pc == "LISTALIVRO" && N != 0){
      for (unsigned i=0; i<N; i++){
-     if (x[0] = "LISTALIVRO N"){
-     string teste;
-     getline(I, teste, ' ');
-     cout << teste <<endl;
-     if (teste == "L:"){
      Livro :: ler(I);
+     return true;
      }
      }
      else return false;
-     }
 }
 
 void ListaLivro :: salvar(ostream &O) const{
+      O << "LISTALIVRO " << N << endl;
       for (unsigned i=0; i<N; i++){
-          if(i = 0){
-            O << "LISTALIVRO " << N << endl;
-          }
-          else{
             Livro :: salvar(O);
             O << endl;
           }
-      }
 }
 
 void ListaLivro :: imprimir()const{
-    unsigned i
-    for(i=0, i<N, i++){
-        if(i = 0){
-            cout << ">> LIVROS:" << endl;
-        }
-        else Livro :: imprimir();
-    }
+    unsigned i;
+    cout << ">> LIVROS:" << N << endl;
+
+    for(i=0; i<N; i++){
+        cout << i << ") ";
+        Livro :: imprimir();
+        cout << endl;
+}
 }
 
 int main()
-{  // ofstream arq("saida.txt");
-    ifstream arq2("saida.txt");
+{   ofstream arq("saida.txt");
+  //  ifstream arq2("saida.txt");
     ListaLivro P;
-    P.incluir(arq2);
+    Livro L;
+    L.digitar();
+    L.imprimir();
+    P.incluir(L);
     P.imprimir();
 
     return 0;
 }
-}
+
